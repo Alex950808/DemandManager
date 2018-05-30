@@ -1,0 +1,94 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Models.DemandInfo
+
+<!-- 主体 -->
+<div class="layui-body">
+            <!-- 主要内容 -->
+            <div class="container">
+                <form class="layui-form" action="~/Demand/ModifyDemandInfo" method="post">
+                    <table class="layui-table layui-table-add layui-table-detail" lay-skin="nob">
+                        <tbody>
+                            <tr style="display:none;">
+                                <td>
+                                    @*需求编号*@
+                                    <input type="hidden" name="DemandId" value="@Model.DemandId" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>产品名称</th>
+                                <td>
+                                    <div class="layui-form-item" style="margin-left:-110px;">
+                                        <div class="layui-input-block" style="width:350px;">
+                                            <select name="ProductId" lay-verify="required">
+                                                @*<option value="1">EMP</option>
+                                                    <option value="2">50YC</option>*@
+                                                @{
+                                                    if (Session["ProductList"] != null)
+                                                    {
+                                                        foreach (Models.Products item in (IList<Models.Products>)Session["ProductList"])
+                                                        {
+                                                            <option value="@item.ProductId" @(Model.ProductId == item.ProductId ? "selected" : "")>@item.ProductName</option>
+                                                        }
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>提交部门</th>
+                                <td>
+                                    <div class="layui-form-item" style="margin-left:-110px;">
+                                        <div class="layui-input-block" style="width:350px;">
+                                            <input type="text" name="SubmissionDepartment" required lay-verify="required" placeholder="请输入标题" value="@Model.SubmissionDepartment" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>需求描述</th>
+                                <td>
+                                    <div class="layui-form-item layui-form-text" style="margin-left:-110px;">
+                                        <div class="layui-input-block" style="width:350px;">
+                                            <textarea name="RequirementDescription" placeholder="请输入需求描述" class="layui-textarea">@Model.RequirementDescription</textarea>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>紧急程度</th>
+                                <td>
+                                    <div class="layui-form-item" style="margin-left:-110px;">
+                                        <div class="layui-input-block" style="width:350px;">
+                                            <select name="EmergencyId" lay-verify="required">
+                                                @*<option value="1">既紧急又重要</option>
+                                                    <option value="2">重要但是不紧急</option>
+                                                    <option value="3">紧急但不重要</option>
+                                                    <option value="4">既不重要也不紧急</option>*@
+                                                @{
+                                                    if (Session["EmergencyList"] != null)
+                                                    {
+                                                        foreach (Models.EmergencyDegree emergency in (IList<Models.EmergencyDegree>)Session["EmergencyList"])
+                                                        {
+                                                            <option value="@emergency.EmergencyId" @(Model.EmergencyId == emergency.EmergencyId ? "selected" : "")>@emergency.EmergencyName</option>
+                                                        }
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="layui-table-btn2 ">
+                        <input type="submit" class="layui-btn" value="修 改" />
+                        <a class="layui-btn layui-btn-primary cancel" onclick="window.history.back()">取 消</a>
+                    </div>
+                </form>
+                @ViewBag.Mess
+            </div>
+        </div>

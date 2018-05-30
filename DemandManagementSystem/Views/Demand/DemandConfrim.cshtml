@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Models.DemandInfo
+
+<!-- 主体 -->
+<div class="layui-body">
+    <!-- 主要内容 -->
+    <div class="container">
+        <!-- 搜索条件 -->
+        <div class="search-res-mask"></div>
+        <div class="search-res">
+            <div class="search-res-btn hide-pc">
+                <button class="layui-btn" id="search-btn"><i class="layui-icon">&#xe615;</i>查询</button>
+            </div>
+            <div class="content-search search-fix">
+                <form action="~/Demand/GetDemandInfoByProductName" method="post">
+                    <div class="layui-form layui-form-pane">
+                        @*<div class="layui-inline">
+                                <label class="layui-form-label">产品名称</label>
+                                <div class="layui-input-inline">
+                                    <input class="layui-input" name="ProductName" value="@ViewBag.ProductName" placeholder="请输入产品名称">
+                                </div>
+                            </div>*@
+                        @*<div class="layui-inline">
+                                <input type="submit" class="layui-btn" value="查询" />
+                                <button class="layui-btn layui-btn-primary hide-pc" id="search-close">关闭</button>
+                            </div>*@
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- 表格列表 -->
+        <div class="table-list">
+            <table class="layui-table layui-list-table" lay-skin="line">
+                <thead>
+                    <tr>
+                        <th>产品名称</th>
+                        <th>提交部门</th>
+                        <th>提交人</th>
+                        <th>认领人</th>
+                        <th>确认人</th>
+                        <th>紧急程度</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (ViewBag.DemandList != null)
+                        {
+                            foreach (Models.DemandInfo demand in ViewBag.DemandList)
+                            {
+                                <tr>
+                                    <td class="layui-table-first"><span class="layui-table-bd">@demand.ProductName</span></td>
+                                    <td><span class="layui-table-bd">@demand.SubmissionDepartment</span></td>
+                                    <td><span class="layui-table-bd">@demand.UserName</span></td>
+                                    <td><span class="layui-table-bd">@demand.ConfirmationName</span></td>
+                                    <td><span class="layui-table-bd">@demand.Upline</span></td>
+                                    <td><span class="layui-table-bd">@demand.EmergencyName</span></td>
+                                    <td class="layui-table-btn">
+                                        <a href="~/Demand/LookDemandInfoByDemandId?DemandInfoId=@demand.DemandId" class="layui-btn layui-btn-normal layui-btn-small a2" style="color:white;">查看详情</a>
+                                        @if (demand.UpTime == null)
+                                        {
+                                            <a href="~/Demand/ConfirmDemand?DemandInfoId=@demand.DemandId" class="layui-btn layui-btn-danger layui-btn-normal layui-btn-small a2" style="color:white;">确认需求</a>
+                                        }
+
+                                    </td>
+                                </tr>
+
+
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 分页 -->
+        @*<div id="table-pages" class="tac"></div>*@
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">// 删除操作
+        $(document).on("click", ".a4", function () {
+            var self = this;
+            layer.confirm('您确认要删除该账户吗？', { title: '删除操作' }, function (index) {
+                $.get('/Index/DeleteInfoById?UserId=' + $(self).attr('data-a1') + ' &UserRoleId=' + $(self).attr('data-a2'), function (data) {
+
+                    console.log(data);
+                    if (data.success) {
+                        layer.msg('删除成功！', { time: 1000 });
+                        window.location.href = "/Index/Index";
+                    }
+                    else {
+                        layer.msg('删除失败！', { time: 1000 });
+                    }
+                    //layer.close(index);
+                    //window.location.href = window.location.href; //'/detail/' + $('#aaa').attr('data-a1');
+                });
+                layer.close(index);
+            });
+        });
+        
+    </script>
+}
+
+

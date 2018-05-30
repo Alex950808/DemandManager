@@ -1,0 +1,8 @@
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\DAL\bin\Release\DAL.dll
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\DAL\bin\Release\DAL.pdb
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\DAL\bin\Release\Models.dll
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\DAL\bin\Release\Models.pdb
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\DAL\obj\Release\DAL.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\DAL\obj\Release\DAL.dll
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\DAL\obj\Release\DAL.pdb

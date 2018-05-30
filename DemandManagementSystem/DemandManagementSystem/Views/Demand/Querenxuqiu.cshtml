@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Models.DemandInfo
+
+<!-- 主体 -->
+<div class="layui-body">
+            <!-- 主要内容 -->
+            <div class="container">
+                <form action="~/Demand/UpLineDemand" method="post">
+                    <table class="layui-table layui-table-add layui-table-detail" lay-skin="nob">
+                        <tbody>
+                            <tr style="display:none;">
+                                <td>
+                                    @*需求编号*@
+                                    <input type="hidden" name="DemandId" value="@Model.DemandId" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>产品名称</th>
+                                <td>
+                                    <span>@Model.ProductName</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>提交部门</th>
+                                <td>
+                                    <span>@Model.SubmissionDepartment</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>需求描述</th>
+                                <td>
+                                    <span>@Html.Raw(Model.RequirementDescription)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>紧急程度</th>
+                                <td>
+                                    <span>@Model.EmergencyName</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>上线计划内容</th>
+                                <td>
+                                    <span>@Html.Raw(Model.PlanContent)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>预计上线时间</th>
+                                <td>
+                                    <span>@Model.ExpectedOnlineTime</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>认领人</th>
+                                <td>
+                                    <span>@Model.ConfirmationName</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>认领时间</th>
+                                <td>
+                                    <span>@Model.ConfirmTime</span>
+                                </td>
+                            </tr>
+                            @*<tr>
+                                    <th>发布时间</th>
+                                    <td>
+                                        <span>@Model.ScheduleTime</span>
+                                    </td>
+                                </tr>*@
+                            <tr>
+                                <th>上线时间</th>
+                                <td>
+                                    <div class="layui-form-item" style="margin-left:-110px;">
+                                        <div class="layui-input-block" style="width:350px;">
+                                            <input name="UpTime" type="text" id="UpTime" placeholder="请选择日期">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="layui-table-btn2 ">
+                        <input type="submit" class="layui-btn" value="确 认" />
+                        <a class="layui-btn layui-btn-danger cancel" onclick="window.history.back()">返 回</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+@section scripts{
+<script type="text/javascript">
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#UpTime' //指定元素
+    });
+</script>
+}

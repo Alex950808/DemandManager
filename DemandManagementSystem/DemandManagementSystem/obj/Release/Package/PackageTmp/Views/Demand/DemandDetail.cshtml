@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Models.DemandInfo
+
+<!-- 主体 -->
+<div class="layui-body">
+            <!-- 主要内容 -->
+            <div class="container">
+                <table class="layui-table layui-table-add layui-table-detail" lay-skin="nob">
+                    <tbody>
+                        <tr>
+                            <th>产品名称</th>
+                            <td>
+                                <span>@Model.ProductName</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>提交部门</th>
+                            <td>
+                                <span>@Model.SubmissionDepartment</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>需求描述</th>
+                            <td>
+                                <span>@Html.Raw(Model.RequirementDescription)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>紧急程度</th>
+                            <td>
+                                <span>@Model.EmergencyName</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>上线计划内容</th>
+                            <td>
+                                <span>@Html.Raw(Model.PlanContent)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>预计上线时间</th>
+                            <td>
+                                <span>@Model.ExpectedOnlineTime</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>认领人</th>
+                            <td>
+                                <span>@Model.ConfirmationName</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>认领时间</th>
+                            <td>
+                                <span>@Model.ConfirmTime</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>确认人</th>
+                            <td>
+                                <span>@Model.Upline</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>发布时间</th>
+                            <td>
+                                <span>@Model.ScheduleTime</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>上线时间</th>
+                            <td>
+                                <span>@Model.UpTime</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="layui-table-btn2 ">
+                    @*<input type="submit" class="layui-btn" value="修 改" />*@
+                    <a class="layui-btn layui-btn-danger cancel" onclick="window.history.back()">返 回</a>
+                </div>
+            </div>
+        </div>

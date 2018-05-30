@@ -1,0 +1,10 @@
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\bin\Release\BLL.dll
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\bin\Release\BLL.pdb
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\bin\Release\DAL.dll
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\bin\Release\Models.dll
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\bin\Release\DAL.pdb
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\bin\Release\Models.pdb
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\obj\Release\BLL.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\obj\Release\BLL.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\obj\Release\BLL.dll
+C:\Users\Admin\Desktop\需求管理系统\DemandManagementSystem\BLL\obj\Release\BLL.pdb

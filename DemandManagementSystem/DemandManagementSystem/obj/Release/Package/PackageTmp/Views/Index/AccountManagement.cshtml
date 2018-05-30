@@ -1,0 +1,106 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Models.UserInfo
+<!-- 主体 -->
+<div class="layui-body">
+    <!-- 主要内容 -->
+    <div class="container">
+        <!-- 搜索条件 -->
+        <div class="search-res-mask"></div>
+        <div class="search-res">
+            <div class="search-res-btn hide-pc">
+                <button class="layui-btn" id="search-btn"><i class="layui-icon">&#xe615;</i>查询</button>
+            </div>
+            <div class="content-search search-fix">
+                <form action="~/Index/GetUserInfoByUserName" method="post">
+                    <div class="layui-form layui-form-pane">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">账号名称</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" name="UserName" value="@ViewBag.UserName" placeholder="请输入账号名称">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <input type="submit" class="layui-btn" value="查询" />
+                            @*<button class="layui-btn" lay-submit="">查询</button>*@
+                            <button class="layui-btn layui-btn-primary hide-pc" id="search-close">关闭</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="tar mt10">
+            <a class="layui-btn layui-btn-normal layui-btn-small" href="~/Index/AddUser">新增账号</a>
+        </div>
+        <!-- 表格列表 -->
+        <div class="table-list">
+            <table class="layui-table layui-list-table" lay-skin="line">
+                <thead>
+                    <tr>
+                        <th>用户姓名</th>
+                        <th>登录账号</th>
+                        <th>用户角色</th>
+                        <th>电话</th>
+                        <th>邮箱</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (ViewBag.UserInfo != null)
+                        {
+                            foreach (Models.UserInfo user in ViewBag.UserInfo)
+                            {
+                                <tr style="display:none;">
+                                    <td><span class="layui-table-bd">@user.UserId</span></td>
+                                    <td><span class="layui-table-bd">@user.UserRoleId</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="layui-table-first"><span class="layui-table-bd">@user.UserName</span></td>
+                                    <td><span class="layui-table-bd">@user.LoginId</span></td>
+                                    <td><span class="layui-table-bd">@user.RoleName</span></td>
+                                    <td><span class="layui-table-bd">@user.PhoneNumber</span></td>
+                                    <td><span class="layui-table-bd">@user.Email</span></td>
+                                    <td class="layui-table-btn">
+                                        <input type="hidden" name="name" value="@user.UserId" />
+                                        <input type="hidden" name="name" value="@user.UserRoleId" />
+                                        <a href="~/Index/LookUserInfoById?UserRoleId=@user.UserRoleId" class="layui-btn layui-btn-normal layui-btn-small a2" style="color:white;">查看详情</a>
+                                        <a href="~/Index/UpdateUserInfo?UserRoleId=@user.UserRoleId" class="layui-btn layui-btn-normal layui-btn-small layui-btn-warm" style="color:white;">修改</a>
+                                        <a data-a1="@user.UserId" data-a2="@user.UserRoleId" class="layui-btn layui-btn-danger layui-btn-small a4" style="color:white;">删除</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 分页 -->
+        @*<div id="table-pages" class="tac"></div>*@
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        // 删除操作
+        $(document).on("click", ".a4", function () {
+            var self = this;
+            layer.confirm('您确认要删除该账户吗？', { title: '删除操作' }, function (index) {
+                $.get('/Index/DeleteInfoById?UserId=' + $(self).attr('data-a1') + ' &UserRoleId=' + $(self).attr('data-a2'), function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        layer.msg('删除成功！', { time: 1000 });
+                        window.location.href = "/Index/UserManager";
+                    }
+                    else {
+                        layer.msg('删除失败！', { time: 1000 });
+                        window.location.href = "/Index/UserManager";
+                    }
+                });
+                layer.close(index);
+            });
+        });
+    </script>  
+}

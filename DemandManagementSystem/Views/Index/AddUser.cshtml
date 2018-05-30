@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Models.RoleInfo
+<!-- 主体 -->
+<div class="layui-body">
+    <!-- 主要内容 -->
+    <div class="container">
+        <form class="layui-form" action="~/Index/AddUserInfo" method="post">
+            <table class="layui-table layui-table-add layui-table-detail" lay-skin="nob">
+                <tbody>
+                    <tr>
+                        <th>用户姓名</th>
+                        <td>
+                            <div class="table-input">
+                                <input type="text" name="UserName" placeholder="请输入用户姓名" value="@ViewData["UserName"]" autocomplete="off" class="layui-input">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>登录账号</th>
+                        <td>
+                            <div class="table-input">
+                                <input type="text" name="LoginId" value="@ViewData["LoginId"]" placeholder="请输入登陆账号" autocomplete="off" class="layui-input">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>登录密码</th>
+                        <td>
+                            <div class="table-input">
+                                <input type="text" name="LoginPwd" value="@ViewData["LoginPwd"]" placeholder="请输入登陆密码" autocomplete="off" class="layui-input">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>确认密码</th>
+                        <td>
+                            <div class="table-input">
+                                <input type="text" name="ConfirmPwd" value="@ViewData["ConfirmPwd"]" placeholder="请确认登陆密码" autocomplete="off" class="layui-input">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>联系电话</th>
+                        <td>
+                            <div class="table-input">
+                                <input type="text" name="PhoneNumber" value="@ViewData["PhoneNumber"]" placeholder="请输入电话号码" autocomplete="off" class="layui-input">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>邮箱</th>
+                        <td>
+                            <div class="table-input">
+                                <input type="text" name="Email" value="@ViewData["Email"]" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                            </div>
+                        </td>
+                    </tr>
+                    @*<tr>
+                            <th>角色类型</th>
+                            <td>
+                                <div class="table-input">
+                                    <input type="radio" name="RoleId" value="1" title="普通用户" checked>
+                                    <input type="radio" name="RoleId" value="2" title="产品经理">
+                                </div>
+                            </td>
+                        </tr>*@
+
+                    <tr>
+                        <th>角色类型</th>
+                        <td>
+                            <div class="table-input">
+                                @{
+                                    if (Session["RoleInfo"] != null)
+                                    {
+                                        foreach (Models.RoleInfo role in (IList<Models.RoleInfo>)Session["RoleInfo"])
+                                        {
+                                            <input type="radio" name="RoleId" value="@role.RoleId" title="@role.RoleName">
+                                        }
+                                    }
+                                }
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="layui-table-btn2 ">
+                <input type="submit" class="layui-btn" value="新 增" />
+                @*<a class="layui-btn" href="首页.html">新 增</a>*@
+                <a class="layui-btn layui-btn-primary cancel" onclick="window.history.back()">取 消</a>
+            </div>
+        </form>
+        @ViewBag.Info
+    </div>
+</div>

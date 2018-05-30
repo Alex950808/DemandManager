@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Models.RoleInfo
+<!-- 主体 -->
+<div class="layui-body">
+    <!-- 主要内容 -->
+    <div class="container">
+        <!-- 搜索条件 -->
+        <div class="search-res-mask"></div>
+        <div class="search-res">
+            <div class="search-res-btn hide-pc">
+                <button class="layui-btn" id="search-btn"><i class="layui-icon">&#xe615;</i>查询</button>
+            </div>
+            <div class="content-search search-fix">
+                <form action="~/Index/GetRoleInfoByRoleName" method="post">
+                    <div class="layui-form layui-form-pane">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">角色名称</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" name="RoleName" value="@ViewBag.RoleName" placeholder="请输入角色名称">
+
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <input type="submit" class="layui-btn" value="查询" />
+                            @*<button class="layui-btn" lay-submit="">查询</button>*@
+                            <button class="layui-btn layui-btn-primary hide-pc" id="search-close">关闭</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 表格列表 -->
+        <div class="table-list">
+            <table class="layui-table layui-list-table" lay-skin="line">
+                <thead>
+                    <tr>
+                        <th>角色编号</th>
+                        <th>角色名称</th>
+                        <th>角色描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (ViewBag.RoleList != null)
+                        {
+                            foreach (Models.RoleInfo role in ViewBag.RoleList)
+                            {
+                                <tr>
+                                    <td class="layui-table-first"><span class="layui-table-bd">@role.RoleId</span></td>
+                                    <td><span class="layui-table-bd">@role.RoleName</span></td>
+                                    <td><span class="layui-table-bd">@role.RoleDescription</span></td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 分页 -->
+        @*<div id="table-pages" class="tac"></div>*@
+
+    </div>
+</div>
+@section scripts{
+
+}

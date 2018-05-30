@@ -1,0 +1,93 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Models.DemandInfo
+
+<!-- 主体 -->
+<div class="layui-body">
+            <!-- 主要内容 -->
+            <div class="container">
+                <!-- 搜索条件 -->
+                <div class="search-res-mask"></div>
+                <div class="search-res">
+                    <div class="search-res-btn hide-pc">
+                        <button class="layui-btn" id="search-btn"><i class="layui-icon">&#xe615;</i>查询</button>
+                    </div>
+                    <div class="content-search search-fix">
+                        <form action="~/Demand/GetDemandInfoByProductName" method="post">
+                            <div class="layui-form layui-form-pane">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">产品名称</label>
+                                    <div class="layui-input-inline">
+                                        <input class="layui-input" name="ProductName" value="@ViewBag.ProductName" placeholder="请输入产品名称">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <input type="submit" class="layui-btn" value="查询" />
+                                    @*<button class="layui-btn" lay-submit="">查询</button>*@
+                                    <button class="layui-btn layui-btn-primary hide-pc" id="search-close">关闭</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="tar mt10">
+                    @if (Convert.ToInt32(Session["RoleId"]) == 1)
+                    {
+                        <a class="layui-btn layui-btn-normal layui-btn-small" href="~/Demand/AddDemandInfo">发布需求</a>
+                    }
+
+                </div>
+                <!-- 表格列表 -->
+                <div class="table-list">
+                    <table class="layui-table layui-list-table" lay-skin="line">
+                        <thead>
+                            <tr>
+                                <th>产品名称</th>
+                                <th>提交部门</th>
+                                <th>提交人</th>
+                                <th>电话</th>
+                                <th>邮箱</th>
+                                <th>紧急程度</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                if (ViewBag.DemandList != null)
+                                {
+                                    foreach (Models.DemandInfo demand in ViewBag.DemandList)
+                                    {
+                                        <tr>
+                                            <td class="layui-table-first"><span class="layui-table-bd">@demand.ProductName</span></td>
+                                            <td><span class="layui-table-bd">@demand.SubmissionDepartment</span></td>
+                                            <td><span class="layui-table-bd">@demand.UserName</span></td>
+                                            <td><span class="layui-table-bd">@demand.PhoneNumber</span></td>
+                                            <td><span class="layui-table-bd">@demand.Email</span></td>
+                                            <td><span class="layui-table-bd">@demand.EmergencyName</span></td>
+                                            <td class="layui-table-btn">
+                                                <a href="~/Demand/LookDemandInfoByDemandId?DemandInfoId=@demand.DemandId" class="layui-btn layui-btn-normal layui-btn-small a2" style="color:white;">查看详情</a>
+                                                @if (Convert.ToInt32(Session["RoleId"]) == 1)
+                                                {
+                                                    <a href="~/Demand/UpdateDemandInfo?DemandInfoId=@demand.DemandId" class="layui-btn layui-btn-normal layui-btn-small layui-btn-warm" style="color:white;">修改</a>
+                                                }
+
+                                                @if (demand.ConfirmTime == null && Convert.ToInt32(Session["RoleId"]) == 2)
+                                                {
+                                                    <a href="~/Demand/ConfrimDemand?DemandInfoId=@demand.DemandId" class="layui-btn layui-btn-normal layui-btn-small layui-btn-danger" style="color:white;">认领</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 分页 -->
+                @*<div id="table-pages" class="tac"></div>*@
+
+            </div>
+        </div>
+

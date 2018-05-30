@@ -1,0 +1,230 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>登录</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/login/css/style.css" rel="stylesheet" />
+    <!-- 提示升级高级浏览器操作 -->
+    <style>
+        .ie-content {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: #fff;
+            z-index: 1000;
+        }
+
+        .ie-content-bj {
+            width: 1000px;
+            height: 380px;
+            position: fixed;
+            left: 50%;
+            top: 36%;
+            margin: -190px 0 0 -500px;
+            background: url(img/sj.jpg) no-repeat;
+        }
+
+        .ie-list {
+            padding: 168px 0 0 371px;
+        }
+
+            .ie-list a {
+                margin-right: 80px;
+            }
+
+        #particles-js {
+            width: 100%;
+            height: 100%;
+            /* background: #000; */
+            background-size: cover;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body class="body_bj">
+    <div id="particles-js">
+        <div class="login">
+            <div class="logo">
+                <img src="~/login/img/456.png" alt="" style="float: left; margin-top: -10px; margin-left: 5px;" />
+            </div>
+            <form action="~/Login/Login" method="post">
+                <ul class="login-list">
+                    <li><input type="text" name="LoginId" value="@ViewBag.LoginId" placeholder="请输入用户名"></li>
+                    <li><input type="password" name="LoginPwd" value="@ViewBag.LoginPwd" placeholder="请输入密码"></li>
+                    <li>
+                        <input type="text" name="ValidateCode" placeholder="请输入验证码" maxlength="4">
+                        <span class="yzm2" id="Verification">
+                            <img src="@Url.Action("VerificationCode","Login")" id="Verification2" onclick="this.src = this.src + '?'" />
+                        </span>
+                        @ViewBag.Login
+                        @Html.ValidationMessage("ValidateCode")
+                    </li>
+                    <li><input type="submit" class="btn" style="line-height:4px;font-size:20px;border:0px solid red" value="登录" /></li>
+                    <!--<li class="tar"><a href="忘记密码.html">忘记密码？</a></li>-->
+                </ul>
+            </form>
+        </div>
+    </div>
+    <!--[if lt IE 8]>
+    <div class="ie-content">
+        <div class="ie-content-bj">
+            <div class="ie-list">
+                <a href="http://www.google.cn/intl/zh-CN/chrome/browser/"><img src="img/sj1.jpg" alt=""></a>
+                <a href="http://www.firefox.com.cn/"><img src="img/sj2.jpg" alt=""></a>
+                <a href="http://chrome.360.cn/"><img src="img/sj3.jpg" alt=""></a>
+            </div>
+        </div>
+    </div>
+    <![endif]-->
+    @*<script>
+            $(document).ready(function () {
+                $("#Verification2").click(function () {
+                    var validateSrc = $(this).attr("src");
+                    $(this).attr("src", validateSrc + "?");
+                });
+            });
+        </script>*@
+    <script src="~/layui/layui.js"></script>
+    <script src="~/js/particles.min.js"></script>
+    <script src="~/layui/lay/modules/layer.js"></script>
+    <script>
+        layer.msg('hello');
+    </script>
+    <script>
+        layui.use(['jquery', 'layer'], function () {
+            var $ = layui.jquery,
+                layer = layui.layer;
+        });
+    </script>
+    <script>
+        particlesJS('particles-js',
+            {
+                "particles": {
+                    "number": {
+                        "value": 40,  //数量
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        },
+                        "image": {
+                            "src": "img/github.svg",
+                            "width": 100,
+                            "height": 100
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#ffffff",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": false,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 150,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": false
+            }
+        );
+    </script>
+
+</body>
+</html>
